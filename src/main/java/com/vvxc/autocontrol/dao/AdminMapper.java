@@ -14,6 +14,8 @@ public interface AdminMapper {
 
     Admin selectByPrimaryKey(Integer id);
 
+    Admin selectByUsernameAndPassword(String username,String password);
+
     int updateByPrimaryKeySelective(Admin record);
 
     int updateByPrimaryKey(Admin record);

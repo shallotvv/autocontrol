@@ -105,9 +105,18 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-     FROM guestbook
+    FROM guestbook
     ORDER BY id
     DESC limit #{0},#{1}
 
+  </select>
+  <select id="listAll" resultMap="ResultMapWithBLOBs">
+    SELECT
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    FROM guestbook
+    ORDER BY id
+    DESC
   </select>
 </mapper>

@@ -21,4 +21,17 @@ public class HomeworkService {
         return mapper.listPage(first,pageSize);
 
     }
+
+    public List<Homework> listAll() {
+        return mapper.listAll();
+    }
+
+    public void deleteByIds(int[] ids) {
+        for (int i=0;i<ids.length;i++)
+            mapper.deleteByPrimaryKey(ids[i]);
+    }
+
+    public void add(Homework homework) {
+        mapper.insert(homework);
+    }
 }

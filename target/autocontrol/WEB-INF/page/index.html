@@ -4,24 +4,25 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/img/favicon.ico">
+    <link rel="icon" href="/autocontrol/img/favicon.ico">
 
     <title>自动控制原理课程网站</title>
 
-    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/autocontrol/css/bootstrap.css" rel="stylesheet">
 
-    <link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <link href="/css/cover.css" rel="stylesheet">
+    <link href="/autocontrol/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="/autocontrol/css/cover.css" rel="stylesheet">
 
-    <script src="/js/ie8-responsive-file-warning.js"></script>
-    <script src="/js/ie-emulation-modes-warning.js"></script>
+    <script src="/autocontrol/js/ie8-responsive-file-warning.js"></script>
+    <script src="/autocontrol/js/ie-emulation-modes-warning.js"></script>
 
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/jquery.form.js"></script>
+    <script src="/autocontrol/js/jquery.min.js"></script>
+    <script src="/autocontrol/js/jquery.form.js"></script>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
     <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+    <script src="/autocontrol/js/date-format.js"></script>
 
       <style type="text/css">
         a{
@@ -60,24 +61,10 @@
             $("#guestbook_btn").closest("li").removeClass("active");
         }
 
-        function formatDate(inputTime) {
-            var date = new Date(inputTime);
-            var y = date.getFullYear();
-            var m = date.getMonth() + 1;
-            m = m < 10 ? ('0' + m) : m;
-            var d = date.getDate();
-            d = d < 10 ? ('0' + d) : d;
-            var h = date.getHours();
-            h = h < 10 ? ('0' + h) : h;
-            var minute = date.getMinutes();
-            var second = date.getSeconds();
-            minute = minute < 10 ? ('0' + minute) : minute;
-            second = second < 10 ? ('0' + second) : second;
-            return y + '年' + m + '月' + d+'日';
-        };
+
 
         function getHomework(currentPage,pageSize){
-            var url="/homework/list";
+            var url="/autocontrol/homework/list";
             var childDivBeforeId="<div class='panel panel-default'><div class='panel-heading'><h4 class='panel-title'><a data-toggle='collapse' data-parent='#accordion'"+
                 "data-target='#";
             var childDivAfterId="'onmouseover=\"style.cursor='pointer'\">";
@@ -98,7 +85,9 @@
                         $("#accordion").append(childDivBeforeId+item.id+childDivAfterId+start+"-"+end+childDivMidle+item.id+childDiv2+item.content+childDivAfter);
                     else
                         $("#accordion").append(childDivBeforeId+item.id+childDivAfterId+start+"-"+end+childDivMidle+item.id+childDiv1+item.content+childDivAfter);
+
                 });
+                window.scrollTo(0,0);
             },"json");
         }
 
@@ -113,7 +102,7 @@
 
             var massageDivAfterContent="</p></div></div>";
 
-            var url="/guestbook/list";
+            var url="/autocontrol/guestbook/list";
             $.post(url,{"currentPage":currentPage,"pageSize":pageSize},function (data) {
                 if (data.length<pageSize) isLastPage=true;else isLastPage=false;
                 $("#messagePage").children().remove();
@@ -123,7 +112,9 @@
                     var content=item.content;
                     var time=formatDate(item.time);
                     $("#messagePage").append(messageDivBeforeName+name+massageDivBeforeTime+time+massageDivBeforeContent+content+massageDivAfterContent);
-                   });
+
+                });
+                window.scrollTo(0,0);
             },"json");
         }
 
@@ -177,8 +168,6 @@
                             currentPage=1;
                             getMessage(currentPage,pageSize);
                             $("#messageForm")[0].reset();
-
-                            alert("发布成功");
                         }else{
                             alert("发布失败");
                         }
@@ -208,7 +197,7 @@
                 <ul class="nav masthead-nav">
                   <li class="active" ><a href="javascript:void(0);" id="courseware_btn">首页</a></li>
                   <li ><a href="javascript:void(0);"id="homework_btn">作业</a></li>
-                  <li ><a id="guestbook_btn" href="javascript:void(0);">留言榜</a></li>
+                  <li ><a id="guestbook_btn" href="javascript:void(0);">留言板</a></li>
                 </ul>
               </nav>
             </div>
@@ -218,7 +207,7 @@
             <h1 class="cover-heading">课程介绍</h1>
             <p class="lead">自动控制（原理）是指在没有人直接参与的情况下，利用外加的设备或装置，使机器、设备或生产过程的某个工作状态或参数自动地按照预定的规律运行。</p>
             <p class="lead">
-              <a href="#" class="btn btn-lg btn-default">点此查看课件</a>
+              <a href="/autocontrol/file" class="btn btn-lg btn-default">点此查看课件</a>
             </p>
           </div>
 
@@ -255,7 +244,7 @@
             </ul>
 
             <div class="form-group clearfix" >
-              <form id="messageForm" action="/guestbook/add" method="post" enctype="multipart/form-data">
+              <form id="messageForm" action="/autocontrol/guestbook/add" method="post" enctype="multipart/form-data">
                 <textarea required="true" rows="5" class="form-control" style="resize: none" maxlength="300" name="content" placeholder="发表点什么吧..."></textarea>
                 <div class="navbar-form navbar-right" role="search">
                   <div class="form-group">
@@ -283,9 +272,9 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/bootstrap.js"></script>
+    <script src="/autocontrol/js/bootstrap.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="/autocontrol/js/ie10-viewport-bug-workaround.js"></script>
 
 
   </body>

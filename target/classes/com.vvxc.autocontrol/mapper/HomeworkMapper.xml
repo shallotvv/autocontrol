@@ -104,4 +104,8 @@
     SELECT id,start_time,end_time,content FROM homework ORDER BY id DESC limit #{0},#{1}
 
   </select>
+  <select id="listAll" resultMap="ResultMapWithBLOBs">
+    SELECT id,start_time,end_time,content FROM homework ORDER BY id DESC
+
+  </select>
 </mapper>

@@ -25,4 +25,15 @@ public class GuestbookService {
         guestbookMapper.insert(guestbook);
     }
 
+    public void deleteByIds(int[] ids) {
+        for (int id:
+             ids) {
+            guestbookMapper.deleteByPrimaryKey(id);
+        }
+
+    }
+
+    public List<Guestbook> listAll() {
+        return guestbookMapper.listAll();
+    }
 }

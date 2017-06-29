@@ -22,4 +22,6 @@ public interface GuestbookMapper {
     int updateByPrimaryKey(Guestbook record);
 
     List<Guestbook> listPage(int start, int pageSzie);
+
+    List<Guestbook> listAll();
 }

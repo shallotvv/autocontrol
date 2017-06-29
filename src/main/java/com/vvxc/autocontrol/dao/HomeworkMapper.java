@@ -21,4 +21,6 @@ public interface HomeworkMapper {
     int updateByPrimaryKeyWithBLOBs(Homework record);
 
     int updateByPrimaryKey(Homework record);
+
+    List<Homework> listAll();
 }
